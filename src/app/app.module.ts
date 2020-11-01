@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { NewProjectComponent } from './new-project/new-project.component';
+import { TutorialDetailsComponent } from './tutorial-details/tutorial-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    NewProjectComponent
+    NewProjectComponent,
+    TutorialDetailsComponent
   ],
   imports: [
     FormsModule,
