@@ -1,6 +1,6 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-mmd-4">
+    <div class="row" *ngFor='let items of tutorials; let i = index'>
+        <div class="col-md-4 mt-3">
             <!-- Card -->
 <div class="card">
 
@@ -20,18 +20,17 @@
     <div class="card-body">
   
       <!-- Title -->
-      <h4 class="card-title">Card title</h4>
+      <h4 class="card-title">{{ items.title }}</h4>
       <hr>
       <!-- Text -->
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-        content.</p>
+      <p class="card-text">{{ items.description }}</p>
   
     </div>
   
     <!-- Card footer -->
     <div class="rounded-bottom mdb-color lighten-3 text-center pt-3">
       <ul class="list-unstyled list-inline font-small">
-        <li class="list-inline-item pr-2 white-text"><i class="far fa-clock pr-1"></i>05/10/2015</li>
+        <li class="list-inline-item pr-2 white-text"><i class="far fa-clock pr-1"></i>{{ items.created_on }}</li>
         <li class="list-inline-item pr-2"><a href="#" class="white-text"><i
               class="far fa-comments pr-1"></i>12</a></li>
         <li class="list-inline-item pr-2"><a href="#" class="white-text"><i class="fab fa-facebook-f pr-1">
