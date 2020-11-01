@@ -1,7 +1,7 @@
-import { TutorialApi } from './tutorial-api';
+import { Tutorial } from './tutorial-api';
 
 describe('TutorialApi', () => {
   it('should create an instance', () => {
-    expect(new TutorialApi()).toBeTruthy();
+    expect(new Tutorial()).toBeTruthy();
   });
 });
