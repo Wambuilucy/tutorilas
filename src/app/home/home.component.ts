@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Tutorial } from '../tutorial-api'; 
-import {TutorilsService} from '../tutorils.service'
+import { TutorialService } from 'src/app/tutorial.service';
 import { HttpClient } from '@angular/common/http'
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -12,50 +12,83 @@ import 'rxjs/add/operator/toPromise';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  tutorial: Tutorial;
+  tutorials: any;
+  currentTutorial = null;
+  currentIndex = -1;
+  title = '';
 
-  tutorials: Tutorial[]= [
-    new Tutorial(1,'Luciest','Lucy on it again', 'lucy.jpg','Lucy with angular problems ahah',
+  tutorial: Tutorial[]= [
+    new Tutorial('Luciest','Lucy on it again', 'lucy.jpg','Lucy with angular problems ahah',
     'Abzed', true, new Date(2021,10,14), new Date(2021,10,14)),
 
-    new Tutorial(2,'Lucy','Lucy yu tha best', 'lucy.jpg','Lucy with Abzed is the best ahahahah',
+    new Tutorial('Lucy','Lucy yu tha best', 'lucy.jpg','Lucy with Abzed is the best ahahahah',
     'Tet', true, new Date(2021,10,14), new Date(2021,10,14))
   ];
 
-  constructor(private myApi:TutorilsService, private http:HttpClient) { }
+  constructor(private myApi:TutorialService, private http:HttpClient, private tutorialService: TutorialService) { }
 
 
-
-  // getData(){
-  //     let promise = new Promise((resolve, reject) => {
-  //     this.myApi.tutorialUrl().toPromise().then( response =>{
-  //       this.tutorial = response;
-  //       console.log(response);     
-        
-  //       resolve()
-  //     },
-  //     error =>{
-  //      alert("An error Occured. Please Wait!");
-       
-  //       reject(error)
-  
-  //     })
-  
-  //    })
-  // }
 
   ngOnInit(): void {
-    interface ApiResponse{
-      tutorial: Tutorial;
+    this.retrieveTutorials()
   }
 
+  retrieveTutorials() {
+    this.tutorialService.getAll()
+      .subscribe(
+        data => {
+          this.tutorials = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+  }
 
-this.http.get<Tutorial>("https://cors-anywhere.herokuapp.com/https://lucyy-tutorials-api.herokuapp.com/api/tutorials/").subscribe(data=>{
-    // Succesful API request
-    this.tutorial = data;
-    console.log(data)
-  })
+  refreshList() {
+    this.retrieveTutorials();
+    this.currentTutorial = null;
+    this.currentIndex = -1;
+  }
+
+  setActiveTutorial(tutorial, index) {
+    this.currentTutorial = tutorial;
+    this.currentIndex = index;
+  }
+
+  removeAllTutorials() {
+    this.tutorialService.deleteAll()
+      .subscribe(
+        response => {
+          console.log(response);
+          this.retrieveTutorials();
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  searchTitle() {
+    this.tutorialService.findByTitle(this.title)
+      .subscribe(
+        data => {
+          this.tutorials = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+  }
 }
 
 
-}
+
+
+  // this.http.get<Tutorial>("https://cors-anywhere.herokuapp.com/https://lucyy-tutorials-api.herokuapp.com/api/tutorials/").subscribe(data=>{
+  //     // Succesful API request
+  //     this.tutorial = data;
+  //     console.log(data)
+  //   })
+  // }
+// }
+

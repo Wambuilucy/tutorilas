@@ -1,10 +1,7 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <div class="row">
         <div class="col-md-4 mt-3" *ngFor="let items of tutorial; let i = index">
-            <!-- Card -->
 <div class="card">
-
-    <!-- Card image -->
     <div class="view overlay">
       <img class="card-img-top" src="http://res.cloudinary.com/luciest/{{ items.image }}" alt="Card image cap">
       <a>
@@ -14,28 +11,91 @@
   
   
   
-    <!-- Card content -->
     <div class="card-body">
   
-      <!-- Title -->
       <h4 class="card-title">{{ items.title }}</h4>
       <hr>
-      <!-- Text -->
       <p class="card-text">{{ items.description }}</p>
   
     </div>
   
-    <!-- Card footer -->
     <div class="rounded-bottom mdb-color lighten-3 text-center pt-3">
       <ul class="list-unstyled list-inline font-small">
         <li class="list-inline-item pr-2 white-text"><i class="far fa-clock pr-1"></i>{{ items.created_on| date :  "dd.MM.y" }}</li>
        
-        <li class="list-inline-item"><a href="#" class="white-text"><i class="fab fa-twitter pr-1"> </i>Toggle</a></li>
+        <li class="list-inline-item"><a href="#" class="white-text"><i class="fab fa-twitter pr-1"> </i></a></li>
       </ul>
     </div>
   
   </div>
-  <!-- Card -->
         </div>
     </div>
+</div> -->
+
+
+
+
+
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by title"
+        [(ngModel)]="title"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-sm btn-outline-secondary"
+          type="button"
+          (click)="searchTitle()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>Tutorials List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let items of tutorials; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveTutorial(tutorial, i)"
+      >
+        {{ items.title }}
+      </li>
+    </ul>
+
+    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllTutorials()">
+      Remove All
+    </button>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currentTutorial">
+      <h4>Tutorial</h4>
+      <div>
+        <label><strong>Title:</strong></label> {{ currentTutorial.title }}
+      </div>
+      <div>
+        <label><strong>Description:</strong></label>
+        {{ currentTutorial.description }}
+      </div>
+      <div>
+        <label><strong>Status:</strong></label>
+        {{ currentTutorial.published ? "Published" : "Pending" }}
+      </div>
+
+      <a class="badge badge-warning" href="/tutorials/{{ currentTutorial.id }}">
+        Edit
+      </a>
+    </div>
+
+    <div *ngIf="!currentTutorial">
+      <br />
+      <p>Please click on a Tutorial...</p>
+    </div>
+  </div>
 </div>

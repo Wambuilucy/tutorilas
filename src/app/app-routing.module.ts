@@ -6,9 +6,9 @@ import {TutorialDetailsComponent}     from './tutorial-details/tutorial-details.
 
 const routes: Routes = [
   { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
-  { path: 'tutorials/', component: HomeComponent },
+  { path: 'tutorials', component: HomeComponent },
   { path: 'tutorials/id', component: TutorialDetailsComponent },
-  { path: 'add/', component: NewProjectComponent },
+  { path: 'add', component: NewProjectComponent },
 ];
 
 @NgModule({

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 
-const baseUrl = 'https://lucyy-tutorials-api.herokuapp.com/api/tutorials';
+const baseUrl = 'https://cors-anywhere.herokuapp.com/https://lucyy-tutorials-api.herokuapp.com/api/tutorials';
 
 @Injectable({
   providedIn: 'root'

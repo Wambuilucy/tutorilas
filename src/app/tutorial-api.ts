@@ -1,6 +1,5 @@
 export class Tutorial {
     constructor(
-        public id:number,
         public title:any,
         public description:any,
         public image:any,
@@ -8,6 +7,6 @@ export class Tutorial {
         public author:any,
         public published:boolean,
         public created_on:Date,
-        public upated_on:Date
+        public updated_on:Date
     ){}
 }
