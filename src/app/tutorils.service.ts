@@ -18,8 +18,4 @@ export class TutorilsService {
   tutorialUrl(){
    return this.http.get<Tutorial>("https://lucyy-tutorials-api.herokuapp.com/api/tutorials/").map((response: any) => response);
   }
-
-  getTutorialId(){
-    return this.http.get<Tutorial>("https://lucyy-tutorials-api.herokuapp.com/api/tutorials/" + this.id).map((response: any) => response);
-  }
 }
